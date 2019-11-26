@@ -5,6 +5,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url "https://dl.bintray.com/android/android-tools" }
+        maven { url "https://maven.google.com" }
+
         if ("true".equalsIgnoreCase(System.getProperty('useLocalMaven', "false"))) {
             println "use local repo"
             mavenLocal()
@@ -12,9 +16,6 @@ buildscript {
             println "use remove repo"
             maven { url findProperty("RELEASE_REPOSITORY_URL") }
             maven { url findProperty("SNAPSHOT_REPOSITORY_URL") }
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
@@ -34,6 +35,11 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven {
+            url "https://maven.google.com"
+        }
+
         if ("true".equalsIgnoreCase(System.getProperty('useLocalMaven', "false"))) {
             mavenLocal()
         } else {

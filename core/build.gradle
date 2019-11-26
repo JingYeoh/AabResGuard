@@ -82,3 +82,23 @@ shadowJar {
     relocate 'com.android', 'shadow.bytedance.com.android'
     relocate 'com.google', 'shadow.bytedance.com.google'
 }
+
+test {
+    useJUnit()
+    include "com/bytedance/android/aabresguard/**"
+    include "com/bytedance/android/aabresguard/bundle"
+    include "com/bytedance/android/aabresguard/commands"
+    maxHeapSize = '1G'
+}
+
+apply plugin: "jacoco"
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+jacocoTestReport {
+    reports {
+        html.enabled true
+    }
+}
+check.dependsOn jacocoTestReport
